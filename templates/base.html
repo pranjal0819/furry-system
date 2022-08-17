@@ -2,8 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Furry System</title>
-    {% block css %}{% endblock css %}
+    <title>{% block head_title %}{{ COMPANY_NAME }}{% endblock head_title %}</title>
+    {% block extrastyle %}
+        <style>
+            :root {
+                --primary: #9774d5;
+                --secondary: #785cab;
+                --link-fg: #7c449b;
+                --link-selected-fg: #8f5bb2;
+            }
+        </style>
+    {% endblock %}
 </head>
 <body>
 <!-- - - - - - - - - START OF CONTENT - - - - - - - - - - - -->
