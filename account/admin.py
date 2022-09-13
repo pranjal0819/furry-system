@@ -9,9 +9,10 @@ admin.site.unregister(get_user_model())
 
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'kind', 'balance', 'hidden', 'user')
-    list_display_links = ('name',)
-    search_fields = list_display
+    list_display = ('id', '__str__', 'kind', 'balance', 'hidden', 'user')
+    list_display_links = ('__str__',)
+    list_filter = ('kind', 'hidden')
+    search_fields = ('user',)
     fieldsets = (
         (None, {'fields': ('name', 'hidden', 'kind', 'balance')}),
         ('Account Details', {'fields': ('settings', 'user')}),
@@ -24,7 +25,8 @@ class AccountAdmin(admin.ModelAdmin):
 class LiabilityAdmin(admin.ModelAdmin):
     list_display = ('id', '__str__', 'credit', 'debit', 'account', 'user')
     list_display_links = ('__str__',)
-    search_fields = list_display
+    list_filter = ('account',)
+    search_fields = ('user',)
     fieldsets = (
         (None, {'fields': ('reference_type', 'reference_id', 'credit', 'debit')}),
         ('Account Details', {'fields': ('account', 'user')}),
@@ -35,11 +37,8 @@ class LiabilityAdmin(admin.ModelAdmin):
 
 @admin.register(get_user_model())
 class UserAdmin(UserAdmin):
-    list_display = ('username', 'email', 'first_name', 'is_staff')
+    list_display = ('id', 'username', 'email', 'first_name', 'last_name', 'is_staff')
     list_display_links = ('username', 'email')
-    list_filter = ('is_active', 'is_staff', 'is_superuser', 'groups')
-    search_fields = ('username', 'first_name', 'last_name', 'email')
-    ordering = ('id', 'is_staff')
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         ('Personal info', {'fields': ('first_name', 'last_name', 'email')}),
