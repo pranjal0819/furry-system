@@ -9,12 +9,12 @@ admin.site.unregister(get_user_model())
 
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
-    list_display = ('id', '__str__', 'kind', 'balance', 'hidden', 'user')
+    list_display = ('id', '__str__', 'kind', 'balance', 'visible', 'user')
     list_display_links = ('__str__',)
-    list_filter = ('kind', 'hidden')
+    list_filter = ('kind', 'visible')
     search_fields = ('user',)
     fieldsets = (
-        (None, {'fields': ('name', 'hidden', 'kind', 'balance')}),
+        (None, {'fields': ('name', 'visible', 'kind', 'balance')}),
         ('Account Details', {'fields': ('settings', 'user')}),
         # ('Timestamp', {'classes': ('collapse',), 'fields': ('created_at', 'updated_at')}),
     )

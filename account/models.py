@@ -6,7 +6,7 @@ ACCOUNT_KIND = ((1, 'Cash'), (2, 'Account'), (3, 'Credit'), (4, 'Saving'), (5, '
 
 class Account(models.Model):
     name = models.CharField(max_length=50)
-    hidden = models.BooleanField(default=False)
+    visible = models.BooleanField(default=True)
     kind = models.IntegerField(choices=ACCOUNT_KIND, default=1)
     settings = models.JSONField(blank=True, default=dict, null=True)
     balance = models.DecimalField(default=0, max_digits=10, decimal_places=2)
